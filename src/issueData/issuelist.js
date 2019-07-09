@@ -8,8 +8,10 @@ class IssuesList extends React.Component{
         super(props)
         this.state = {
             fetch: false,
-            issues: []
-        }
+            issues: [],
+            open: true, 
+            close: false
+        } 
     }
 
     componentDidMount(){
@@ -20,10 +22,9 @@ class IssuesList extends React.Component{
     
     render(){        
         console.log("inside issueslist render")
-        const data = (this.props.id)?this.props.id : "open"
+        console.log(this.props)
+        const data = (this.props.open)? this.props.state : "open"
         console.log(data)
-        // const keydata = this.props.keyValue || ""
-        // console.log(keydata)
         return (
             <div>
                 <IssueHeader />
@@ -32,6 +33,10 @@ class IssuesList extends React.Component{
                     return (<Issues key={index} data={issue}/>)
                 }):"loading.."
                 }
+                {/* {this.state.fetch?this.state.issues.map((issue, index) => {
+                    return (<Issues key={index} data={issue}/>)
+                }):"loading.."
+                } */}
             </div>
         );
     }
