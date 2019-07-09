@@ -16,30 +16,7 @@ class IssueHeader extends React.Component{
             close: 0
         }
     }
-    
-
-    // handleOpenIssue(issue){
-    //     console.log(issue)
-    //     for(let i = 0; i < issue.length; i++){
-                
-    //         if(issue[i]["state"] === 'open'){
-    //             console.log("inside loop")
-    //             this.setState((prevState) => ({
-    //                 open: prevState.open + 1
-    //             }),()=> {
-    //                 console.log("=============", this.state.open)
-    //             });
-    //         }
-    //         if(issue[i]["state"] === 'close'){
-    //             this.setState((prevState) => ({
-    //                 close: prevState.close + 1
-    //             }));
-    //         }
-    //     }
         
-    // }
-
-    
     render(){
         
         console.log("in issue header render")
