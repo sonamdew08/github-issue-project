@@ -1,37 +1,28 @@
 import React from "react";
 import IssueHeader from "../IssueHeader/IssueHeader"
 import { transformAsync } from "@babel/core";
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 class Issues extends React.Component{
+
+    constructor(props){
+        super(props)
+        this.state = {
+            open: true
+        }
+    }
     
     render(){
-        const issues = this.props.issues
-        console.log("inside issues render")
-        console.log(issues)
+        const issues = this.props.data
         return (
-            <div>
-                <table>
-                    <tbody>
-                        <tr className="issue"><IssueHeader issues={issues}/></tr>
-                        {Array.isArray(issues) && issues.map((object, index) => (
-                        <tr className="issue" key={index}>
-                            <a className="issue-links" href="">{object.title}</a>
-                            {object.state}
-                        </tr>
-                    ))
-                    }   
-                    </tbody>
-                    
-                </table>
-                
+            <div className="issue">
+                <a href="">{issues.title}</a>
+                <div>
+                    <p className="issue-info">#{issues.id} opened by {issues.user.login}</p>
+                </div>
             </div>
         );
     }
 }
 
-export default connect(
-    state => ({
-        issues: state
-    })
-)(Issues);
+export default Issues;

@@ -20,7 +20,7 @@ class Author extends React.Component{
         const data = this.props.issues
         return (
             <div>
-                <form>
+                {/* <form>
                     <FormControl>
                         <InputLabel htmlFor="filterby-author">Author</InputLabel>
                         <Select>
@@ -32,14 +32,15 @@ class Author extends React.Component{
                         }   
                         </Select>
                     </FormControl>
-                </form>
+                </form> */}
             </div>
         );
     }
 }
 
-export default connect(
-    state => ({
-        issues: state
-    })
-)(Author);
+// export default connect(
+//     state => ({
+//         issues: state
+//     })
+// )(Author);
+export default Author;

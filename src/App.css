@@ -32,13 +32,17 @@
     margin: -1px -1px 0;
     padding: 16px;
 }
-
+.open-close{
+    width: 10%;
+    display: inline;
+}
 a{
     text-decoration: none;
     color: black;
 }
 .issue{
     display: flex;
+    flex-direction: column;
     border: 1px solid #d1d5da;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -50,4 +54,8 @@ a{
     padding: inherit;
     display: block;
     font-weight: 500;
+}
+.issue-info{
+    color: lightslategrey;
+    font-size: 0.7em;
 }
