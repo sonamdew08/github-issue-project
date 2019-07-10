@@ -1,42 +1,42 @@
 import React from "react";
 import Issues from "./issues"
-import IssueHeader from "../IssueHeader/IssueHeader"
 
 class IssuesList extends React.Component{
 
     constructor(props){
         super(props)
         this.state = {
-            fetch: false,
-            issues: [],
-            open: true, 
-            close: false
+            fetch: this.props.fetch || false,
+            issues: []
         } 
+        console.log("calling constructor")
+        console.log(this.state)
     }
 
     componentDidMount(){
         if(!this.state.fetch){
-            this.setState({issues: this.props.data, fetch: true})
+            this.setState({issues: this.props.data})
         }
     }
     
+    componentDidUpdate(){
+        console.log("updated")
+        if(!this.state.fetch){
+            console.log("inside update condition")
+            this.setState({issues: this.props.data, fetch: true})
+        }
+    }
+
     render(){        
         console.log("inside issueslist render")
-        console.log(this.props)
-        const data = (this.props.open)? this.props.state : "open"
-        console.log(data)
+        console.log(this.state)
         return (
             <div>
-                <IssueHeader />
-                {this.state.fetch?this.state.issues.filter((issue) => (issue.state === data))
-                .map((issue, index) => {
+                {console.log("--------------------", this.state)}
+                {this.state.fetch?this.state.issues.map((issue, index) => {
                     return (<Issues key={index} data={issue}/>)
-                }):"loading.."
+                }):<p>loading...</p>
                 }
-                {/* {this.state.fetch?this.state.issues.map((issue, index) => {
-                    return (<Issues key={index} data={issue}/>)
-                }):"loading.."
-                } */}
             </div>
         );
     }

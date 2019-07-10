@@ -1,38 +1,32 @@
 import React from "react";
-// import Select from '@material-ui/core/Select';
-// import FormControl from '@material-ui/core/FormControl';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import { connect } from 'react-redux';
+
 
 class Author extends React.Component{
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            author: [{
-                name : "",
-                avatar: "",
-                id: ""
-            }]
-        }
+
+        this.state = { value: 'Author' };
+        this.handleChange = this.handleChange.bind(this);
     }
+
+    handleChange(event){
+        this.setState({ value: event.target.value });
+    }
+
     render(){
-        const data = this.props.issues
+        const data = this.props.issue
+        console.log("Author" , data)
         return (
             <div>
-                {/* <form>
-                    <FormControl>
-                        <InputLabel htmlFor="filterby-author">Author</InputLabel>
-                        <Select>
-                            {Array.isArray(data) && data.map((object, index) => (
-                            <MenuItem className="issue" key={index}>
-                                {object.login}
-                            </MenuItem>
+                <select value={this.state.value} onChange={this.handleChange}>
+                <option value="Author" disabled>Author</option>
+                    {Array.isArray(data) && data.map((object, index) => (
+                        <option key={index}>
+                            {object.user.login}
+                        </option>
                         ))
                         }   
-                        </Select>
-                    </FormControl>
-                </form> */}
+                </select>
             </div>
         );
     }

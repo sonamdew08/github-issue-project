@@ -6,8 +6,9 @@ class Open extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            open: false, state: ""
+            open: false, issues: [], openedIssue:[], fetch: false
         }
+        
         console.log("Inside open constructor")
         console.log(this.state)
         this.handleClick = this.handleClick.bind(this);
@@ -15,7 +16,13 @@ class Open extends React.Component{
 
     handleClick(event){
         event.preventDefault()
-        this.setState({open: true, state: "open"})
+        if(!this.state.open){
+            this.setState({issues: this.props.issue, open: true})
+        }
+        if(this.state.issues.length > 0){
+            this.setState({openedIssue : this.state.issues.filter((item) => (item.state === 'open'))})
+        }
+        
     }
 
     render(){
@@ -23,7 +30,7 @@ class Open extends React.Component{
         return (
             <span className="open">
                 <a href="" className="open-close" onClick={this.handleClick}>Open</a>
-                {this.state.open? <IssuesList open={this.state.open} state={this.state.state}/>: ""}
+                {this.state.open?<IssuesList data={this.state.openedIssue} fetch={this.state.fetch}/>:""}
             </span>
              
         );

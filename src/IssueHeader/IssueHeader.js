@@ -9,27 +9,33 @@ import Sort from "./Sort";
 import Projects from "./Projects";
 
 class IssueHeader extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            open: 0,
-            close: 0
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         fetch: false,
+    //         issues: []
+    //     }
+    // }
+
+    // componentDidMount(){
+    //     if(!this.state.fetch){
+    //         this.setState({issues: this.props.data, fetch: true})
+    //     }
+    // }
         
-    render(){
-        
+    render(){        
         console.log("in issue header render")
+        console.log(this.props)
         return (
             <div className="issue-header">
-                <Open />
-                <Close />
-                <Author />
-                <Labels />
-                <Projects />
-                <MileStones />
-                <Assignee />
-                <Sort />
+                <Open issue = {this.props.issues}/>
+                <Close issue = {this.props.issues}/>
+                <Author issue = {this.props.issues}/>
+                <Labels issue = {this.props.issues}/>
+                <Projects issue = {this.props.issues}/>
+                <MileStones issue = {this.props.issues}/>
+                <Assignee issue = {this.props.issues}/>
+                <Sort issue = {this.props.issues}/>
             </div>
         );
     }
