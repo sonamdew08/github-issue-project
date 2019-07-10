@@ -1,7 +1,7 @@
 import React from "react";
 import IssuesList from "../issueData/issuelist"
 import sortJsonData from "sort-json-array"
-// import Issue from "../App"
+import Issue from "../App"
 
 class Sort extends React.Component{
     constructor(props) {
@@ -18,24 +18,25 @@ class Sort extends React.Component{
     sortIssues(){
         if(this.state.value === 'newest'){
             console.log("newest")
-            var data = sortJsonData(this.state.data, "created_at", 'des')
+            let data = sortJsonData(this.state.data, "created_at", 'des')
             this.setState({sortedData: data, sort: true})
         }
         if(this.state.value === 'oldest'){
             console.log("oldest")
-            var data = sortJsonData(this.state.data, "created_at", 'asc')
+            let data = sortJsonData(this.state.data, "created_at", 'asc')
             this.setState({sortedData: data, sort: true})
         }
         if(this.state.value === 'recently updated'){
             console.log("recently updated")
-            var data = sortJsonData(this.state.data, "updated_at", 'des')
+            let data = sortJsonData(this.state.data, "updated_at", 'des')
             this.setState({sortedData: data, sort: true})
         }
         if(this.state.value === 'least recently updated'){
             console.log("least recently updated")
-            var data = sortJsonData(this.state.data, "updated_at", 'asc')
+            let data = sortJsonData(this.state.data, "updated_at", 'asc')
             console.log("data", data)
             this.setState({sortedData: data, sort: true})
+            
         }
         
     }
@@ -52,6 +53,9 @@ class Sort extends React.Component{
         console.log("sort", this.props)
         console.log(this.state)
         const sortIssue = ['newest', 'oldest', 'recently updated', 'least recently updated']
+        // if(this.state.sort){
+        //     return <IssuesList data={this.state.sortedData}/>;
+        // }
         return (
             <div>
                 <select value={this.state.value} onChange={this.handleChange}>
@@ -63,9 +67,7 @@ class Sort extends React.Component{
                 
                 {this.state.sort ? (() => {
                     return <IssuesList data={this.state.sortedData}/>;
-                })(): "" }
-                {/* {this.state.sort && <IssuesList data={this.state.sortedData}/>} */}
-                
+                })(): "" }                
             </div>
         );
     }

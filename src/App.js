@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import jsonData from './issues.json';
 import IssuesList from './issueData/issuelist';
 import IssueHeader from "./IssueHeader/IssueHeader";
+// import Sort from "./IssueHeader/Sort"
 
 var data = JSON.parse(JSON.stringify(jsonData))
 
@@ -29,7 +30,7 @@ class Issue extends React.Component {
         return (
             <Container maxWidth="md">
                 <IssueHeader issues = {this.state.issues}/>
-                {this.state.fetch? <IssuesList data={this.state.issues}/>: "Loading.."}               
+                {this.state.fetch? <IssuesList data={this.state.issues}/>: "Loading.."}             
             </Container>
         );
     }
