@@ -20,12 +20,12 @@ class IssuesList extends React.Component{
         }
     }
     
-    componentDidUpdate(prevProps){
+    componentDidUpdate(){
         console.log("updated")
-        console.log("prevProps", prevProps)
-        console.log("currProps", this.props)
+        // console.log("prevProps", prevProps)
+        // console.log("currProps", this.props)
         // this.setState({issues: this.props.data})
-        if(prevProps !== this.props){
+        if(this.state.data){
             console.log("inside update condition")
             this.setState({issues: this.props.data, data: false})
         }

@@ -32,7 +32,7 @@ class Issue extends React.Component {
     getFilteredListOfIssues(value){
         console.log("Inside getListofissues")
         this.setState({issues: value})
-        console.log("_________", this.state.issues)
+        console.log(this.state.issues)
     }
         
     render(){
