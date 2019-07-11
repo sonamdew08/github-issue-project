@@ -6,7 +6,8 @@ class IssuesList extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            fetch: this.props.fetch || false,
+            fetch: false,
+            data: false,
             issues: []
         } 
         console.log("calling constructor")
@@ -15,21 +16,24 @@ class IssuesList extends React.Component{
 
     componentDidMount(){
         if(!this.state.fetch){
-            this.setState({issues: this.props.data})
+            this.setState({issues: this.props.data, fetch: true, data:true})
         }
     }
     
-    componentDidUpdate(){
+    componentDidUpdate(prevProps){
         console.log("updated")
-        if(!this.state.fetch){
+        console.log("prevProps", prevProps)
+        console.log("currProps", this.props)
+        // this.setState({issues: this.props.data})
+        if(prevProps !== this.props){
             console.log("inside update condition")
-            this.setState({issues: this.props.data, fetch: true})
+            this.setState({issues: this.props.data, data: false})
         }
     }
 
     render(){        
         console.log("inside issueslist render")
-        console.log(this.state)
+        console.log(this.props)
         return (
             <div>
                 {console.log("--------------------", this.state)}

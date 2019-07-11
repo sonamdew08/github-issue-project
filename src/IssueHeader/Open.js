@@ -14,23 +14,32 @@ class Open extends React.Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
+    componentDidUpdate(){
+        if(!this.state.fetch){
+            this.setState({issues: this.props.issue, fetch: true})
+        }
+        if(this.state.open){
+            if(this.state.issues.length > 0){
+                this.setState({openedIssue : this.state.issues.filter((item) => (item.state === 'open')), open: false})
+                console.log("---openned Issue ---", this.state.openedIssue)
+                this.props.openedData(this.state.openedIssue)
+            }
+        }
+    }
+
     handleClick(event){
-        event.preventDefault()
-        if(!this.state.open){
-            this.setState({issues: this.props.issue, open: true})
-        }
-        if(this.state.issues.length > 0){
-            this.setState({openedIssue : this.state.issues.filter((item) => (item.state === 'open'))})
-        }
-        
+        event.preventDefault()  
+        console.log("inside handleClick of open")
+        console.log(this.state.issues)
+        this.setState({open: true})        
     }
 
     render(){
-        // console.log("inside open component" , this.props)
+        console.log("inside open component" , this.props)
         return (
             <span className="open">
                 <a href="" className="open-close" onClick={this.handleClick}>Open</a>
-                {this.state.open?<IssuesList data={this.state.openedIssue} fetch={this.state.fetch}/>:""}
+                {/* {this.state.open?<IssuesList data={this.state.openedIssue} fetch={this.state.fetch}/>:""} */}
             </span>
              
         );

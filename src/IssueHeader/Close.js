@@ -30,7 +30,7 @@ class Close extends React.Component{
         return (            
             <span className="open">
                 <a href="" className="open-close" onClick={this.handleClick}>Close</a>
-                {this.state.close?<IssuesList data={this.state.closedIssue} fetch={this.state.fetch}/>:""}
+                {/* {this.state.close?<IssuesList data={this.state.closedIssue} fetch={this.state.fetch}/>:""} */}
             </span>
         );
     }

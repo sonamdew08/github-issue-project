@@ -19,24 +19,27 @@ class Sort extends React.Component{
         if(this.state.value === 'newest'){
             console.log("newest")
             let data = sortJsonData(this.state.data, "created_at", 'des')
-            this.setState({sortedData: data, sort: true})
+            this.setState({sortedData: data, sort: true, fetch:false})
+            this.props.sortData(this.state.sortedData)
         }
         if(this.state.value === 'oldest'){
             console.log("oldest")
             let data = sortJsonData(this.state.data, "created_at", 'asc')
-            this.setState({sortedData: data, sort: true})
+            this.setState({sortedData: data, sort: true, fetch:false})
+            this.props.sortData(this.state.sortedData)
         }
         if(this.state.value === 'recently updated'){
             console.log("recently updated")
             let data = sortJsonData(this.state.data, "updated_at", 'des')
             this.setState({sortedData: data, sort: true})
+            this.props.sortData(this.state.sortedData)
         }
         if(this.state.value === 'least recently updated'){
             console.log("least recently updated")
             let data = sortJsonData(this.state.data, "updated_at", 'asc')
             console.log("data", data)
             this.setState({sortedData: data, sort: true})
-            
+            this.props.sortData(this.state.sortedData)
         }
         
     }
@@ -46,7 +49,7 @@ class Sort extends React.Component{
         }
         if(!this.state.sort){
             this.sortIssues();
-        }        
+        }
     }
 
     render(){

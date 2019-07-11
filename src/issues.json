@@ -442,7 +442,7 @@
       "site_admin": false
     },
     "labels": [],
-    "state": "open",
+    "state": "close",
     "locked": false,
     "assignee": null,
     "assignees": [],
@@ -562,7 +562,7 @@
         "default": false
       }
     ],
-    "state": "open",
+    "state": "close",
     "locked": false,
     "assignee": null,
     "assignees": [],
@@ -692,7 +692,7 @@
         "default": false
       }
     ],
-    "state": "open",
+    "state": "close",
     "locked": false,
     "assignee": null,
     "assignees": [],

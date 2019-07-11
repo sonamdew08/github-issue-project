@@ -3,7 +3,7 @@ import './App.css';
 import Container from '@material-ui/core/Container';
 import jsonData from './issues.json';
 import IssuesList from './issueData/issuelist';
-// import IssueHeader from "./IssueHeader/IssueHeader";
+import FilteredIssue from "./IssueHeader/IssueHeader";
 import Sort from "./IssueHeader/Sort"
 
 var data = JSON.parse(JSON.stringify(jsonData))
@@ -13,9 +13,13 @@ class Issue extends React.Component {
         super(props);
         this.state = {
             issues: [],
-            fetch: false
+            fetch: false, 
+            currentFilter: "open"
         }
         // console.log("Inside Constructor")
+        this.getFilteredListOfIssues = this.getFilteredListOfIssues.bind(this)
+        // this.getListOfIssues = this.getListOfIssues.bind(this)
+
     }
 
     componentDidMount(){
@@ -25,19 +29,17 @@ class Issue extends React.Component {
         }
     }
 
-    getListOfIssues(){
+    getFilteredListOfIssues(value){
         console.log("Inside getListofissues")
-        this.setState({issues: this.props.data})
+        this.setState({issues: value})
+        console.log("_________", this.state.issues)
     }
-    
+        
     render(){
         // console.log("Inside app render")
         return (
             <Container maxWidth="md">
-                {/* <IssueHeader issues = {this.state.issues}/> */}
-                
-                <Sort issue = {this.props.issues} sortData = {this.getListOfIssues}/>
-
+                <FilteredIssue issues = {data} filteredList = {this.getFilteredListOfIssues} />
                 {this.state.fetch? <IssuesList data={this.state.issues}/>: "Loading.."}             
             </Container>
         );
