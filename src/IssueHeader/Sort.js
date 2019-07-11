@@ -53,9 +53,6 @@ class Sort extends React.Component{
         console.log("sort", this.props)
         console.log(this.state)
         const sortIssue = ['newest', 'oldest', 'recently updated', 'least recently updated']
-        // if(this.state.sort){
-        //     return <IssuesList data={this.state.sortedData}/>;
-        // }
         return (
             <div>
                 <select value={this.state.value} onChange={this.handleChange}>
