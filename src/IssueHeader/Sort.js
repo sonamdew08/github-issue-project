@@ -62,9 +62,9 @@ class Sort extends React.Component{
                     ))}                    
                 </select>
                 
-                {this.state.sort ? (() => {
+                {/* {this.state.sort ? (() => {
                     return <IssuesList data={this.state.sortedData}/>;
-                })(): "" }                
+                })(): "" }                 */}
             </div>
         );
     }
