@@ -24,6 +24,7 @@ class FilteredIssue extends React.Component{
         this.getOpenedIssueList = this.getOpenedIssueList.bind(this)
         this.getClosedIssueList = this.getClosedIssueList.bind(this)
         this.getSortedIssueList = this.getSortedIssueList.bind(this)
+        this.getIssueListByAuthor = this.getIssueListByAuthor.bind(this)
     }
 
     componentDidMount(){
@@ -51,6 +52,9 @@ class FilteredIssue extends React.Component{
                 }
                 else if(this.state.currentFilter === 'Sort'){
                     this.getSortedIssueList(filterby)
+                }
+                else if(this.state.currentFilter === 'Author'){
+                    this.getIssueListByAuthor(filterby)
                 }
                 else{
         
@@ -105,6 +109,17 @@ class FilteredIssue extends React.Component{
         }
     }
 
+    getIssueListByAuthor(filterby){
+        console.log(filterby)
+        if(!this.state.getData){
+            this.setState({filterIssues: this.state.issues.filter((item) => (item.user.login === filterby))}, 
+            () => {
+                console.log("Hello from if", this.state.filterIssues)
+                this.props.filteredlist(this.state.filterIssues)
+            })
+        }
+    }
+
     render(){        
         console.log("in issue header render")
         // console.log(this.props.currentFilter)
@@ -112,7 +127,7 @@ class FilteredIssue extends React.Component{
             <div className="issue-header">
                 <Open openedData = {this.getFilter} />
                 <Close closedData = {this.getFilter}/>
-                {/* <Author issue = {this.props.issues}/> */}
+                <Author authorData = {this.getFilter} issue = {this.props.issues}/>
                 {/* <Labels issue = {this.props.issues}/> */}
                 {/* <Projects issue = {this.props.issues}/>
                 <MileStones issue = {this.props.issues}/>

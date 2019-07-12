@@ -18,8 +18,7 @@ class Sort extends React.Component{
     }
 
     render(){
-        console.log("sort", this.props)
-        console.log(this.state)
+        
         const sortIssue = ['newest', 'oldest', 'recently updated', 'least recently updated']
         return (
             <div>
