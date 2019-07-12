@@ -7,49 +7,14 @@ class Sort extends React.Component{
     constructor(props) {
         super(props);
 
-        this.state = { value: 'Sort', data:[], fetch: false, sortedData: [], sort: false };
+        this.state = { filter: 'Sort', filterby:"" };
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event){
-        this.setState({ value: event.target.value });
-    }
-
-    sortIssues(){
-        if(this.state.value === 'newest'){
-            console.log("newest")
-            let data = sortJsonData(this.state.data, "created_at", 'des')
-            this.setState({sortedData: data, sort: true, fetch:false})
-            this.props.sortData(this.state.sortedData)
-        }
-        if(this.state.value === 'oldest'){
-            console.log("oldest")
-            let data = sortJsonData(this.state.data, "created_at", 'asc')
-            this.setState({sortedData: data, sort: true, fetch:false})
-            this.props.sortData(this.state.sortedData)
-        }
-        if(this.state.value === 'recently updated'){
-            console.log("recently updated")
-            let data = sortJsonData(this.state.data, "updated_at", 'des')
-            this.setState({sortedData: data, sort: true})
-            this.props.sortData(this.state.sortedData)
-        }
-        if(this.state.value === 'least recently updated'){
-            console.log("least recently updated")
-            let data = sortJsonData(this.state.data, "updated_at", 'asc')
-            console.log("data", data)
-            this.setState({sortedData: data, sort: true})
-            this.props.sortData(this.state.sortedData)
-        }
-        
-    }
-    componentDidUpdate(){
-        if(!this.state.fetch){
-            this.setState({data: this.props.issue, fetch: true})
-        }
-        if(!this.state.sort){
-            this.sortIssues();
-        }
+        this.setState({ filterby: event.target.value }, ()=>{
+            this.props.sortData(this.state.filter, this.state.filterby)
+        });
     }
 
     render(){
@@ -58,16 +23,12 @@ class Sort extends React.Component{
         const sortIssue = ['newest', 'oldest', 'recently updated', 'least recently updated']
         return (
             <div>
-                <select value={this.state.value} onChange={this.handleChange}>
+                <select value={this.state.filter} onChange={this.handleChange}>
                 <option value="Sort" disabled>Sort</option>
                     {sortIssue.map((elems, index) => (
                         <option key={index} value={elems}>{elems}</option>
                     ))}                    
                 </select>
-                
-                {/* {this.state.sort ? (() => {
-                    return <IssuesList data={this.state.sortedData}/>;
-                })(): "" }                 */}
             </div>
         );
     }

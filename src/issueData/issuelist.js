@@ -17,14 +17,14 @@ class IssuesList extends React.Component{
             this.setState({issues: this.props.data, fetch: true, data:true})
         }
     }
-    
-    // componentDidUpdate(prevProps){
-    //     console.log("updated")
-    //     if(this.state.data || prevProps !== this.props ){
-    //         console.log("inside update condition")
-    //         this.setState({issues: this.props.data, data: false})
-    //     }
-    // }
+    // prevProps !== this.props 
+    componentDidUpdate(prevProps){
+        console.log("updated")
+        if(prevProps !== this.props){
+            console.log("inside update condition")
+            this.setState({issues: this.props.data, data: false})
+        }
+    }
 
     render(){
         return (

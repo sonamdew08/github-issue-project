@@ -13,9 +13,10 @@ class IssueData extends React.Component {
         this.state = {
             issues: [],
             fetch: false, 
-            currentFilter: "open"
+            currentFilter: "open",
+            filter: false
         }
-        // this.getFilteredListOfIssues = this.getFilteredListOfIssues.bind(this)
+        this.getFilteredListOfIssues = this.getFilteredListOfIssues.bind(this)
 
     }
 
@@ -26,17 +27,20 @@ class IssueData extends React.Component {
         }
     }
 
-    // getFilteredListOfIssues(value){
-    //     console.log("Inside getListofissues")
-    //     this.setState({issues: value})
-    //     console.log(this.state.issues)
-    // }
+    getFilteredListOfIssues(value){
+        console.log("Inside getListofissues")
+        if(!this.state.filter)
+        {
+            this.setState({issues: value}, () => console.log("Inside getListofissues", this.state.issues))            
+        }
+        
+    }
         
     render(){
         // console.log("Inside app render") filteredList = {this.getFilteredListOfIssues} 
         return (
             <Container maxWidth="md">
-                <FilteredIssue issues = {data}/>
+                <FilteredIssue issues = {data} filteredlist = {this.getFilteredListOfIssues}/>
                 {this.state.fetch? <IssuesList data={this.state.issues}/>: "Loading.."}             
             </Container>
         );
