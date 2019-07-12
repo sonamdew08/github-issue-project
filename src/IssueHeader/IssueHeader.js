@@ -37,7 +37,7 @@ class FilteredIssue extends React.Component{
 
     getFilter(newFilter, filterby){
         this.setState({currentFilter: newFilter}, 
-            () =>{
+            () => {
                 if(this.state.currentFilter === 'open'){
                     this.getOpenedIssueList()
                 }
@@ -135,7 +135,7 @@ class FilteredIssue extends React.Component{
     getIssueListBySearch(filterby){
         const regex = new RegExp(filterby, 'i');
         if(!this.state.getData){
-            this.setState({filterIssues: this.state.issues.filter((item) => item.get('name').search(regex) > -1)}, 
+            this.setState({filterIssues: this.state.issues.filter(item => item.title.match(regex))},
             () => {
                 this.props.filteredlist(this.state.filterIssues)
             })

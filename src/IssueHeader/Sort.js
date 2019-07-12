@@ -1,7 +1,4 @@
 import React from "react";
-import IssuesList from "../issueData/issuelist"
-import sortJsonData from "sort-json-array"
-import Issue from "../App"
 
 class Sort extends React.Component{
     constructor(props) {

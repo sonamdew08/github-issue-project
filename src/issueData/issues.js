@@ -1,7 +1,4 @@
 import React from "react";
-import IssueHeader from "../IssueHeader/IssueHeader"
-import { transformAsync } from "@babel/core";
-// import { connect } from 'react-redux';
 
 class Issues extends React.Component{
 

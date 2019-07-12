@@ -1,5 +1,4 @@
 import React from "react";
-import IssuesList from "../issueData/issuelist"
 
 class Open extends React.Component{
     constructor(props){
