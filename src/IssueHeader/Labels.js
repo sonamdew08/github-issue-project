@@ -3,27 +3,29 @@ import React from "react";
 class Labels extends React.Component{
     constructor(props) {
         super(props);
-
-        this.state = { value: 'Labels' };
+        this.state = { filter: 'Labels', filterby: "" };
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event){
-        this.setState({ value: event.target.value });
+        this.setState({ filterby: event.target.value }, ()=> {
+            this.props.labelData(this.state.filter, this.state.filterby)});
     }
 
     render(){
         const data = this.props.issue
         return (
             <div>
-                <select value={this.state.value} onChange={this.handleChange}>
+                <select value={this.state.filter} onChange={this.handleChange}>
                 <option value="Labels" disabled>Labels</option>
                     {Array.isArray(data) && data.map((object, index) => (
-                        <option key={index}>
-                            {object.labels}
-                        </option>
+                        (object.labels).map((label, index) => (
+                            <option key={index}>
+                            {label.name}
+                            </option>
                         ))
-                        }   
+                    ))
+                    }   
                 </select>
             </div>
         );

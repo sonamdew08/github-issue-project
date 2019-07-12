@@ -1,14 +1,11 @@
 import React from "react";
-import Assignee from "./Assignee";
 import Author from "./Author";
 import Close from "./Close";
 import Labels from "./Labels";
-import MileStones from "./MileStones";
 import Open from "./Open";
 import Sort from "./Sort";
-import Projects from "./Projects";
 import sortJsonData from "sort-json-array"
-
+import Search from "./Search";
 
 class FilteredIssue extends React.Component{
     constructor(props){
@@ -25,6 +22,8 @@ class FilteredIssue extends React.Component{
         this.getClosedIssueList = this.getClosedIssueList.bind(this)
         this.getSortedIssueList = this.getSortedIssueList.bind(this)
         this.getIssueListByAuthor = this.getIssueListByAuthor.bind(this)
+        this.getIssueListByLabels = this.getIssueListByLabels.bind(this)
+        this.getIssueListBySearch = this.getIssueListBySearch.bind(this)
     }
 
     componentDidMount(){
@@ -33,13 +32,10 @@ class FilteredIssue extends React.Component{
 
     getListOfIssues(value){
         this.setState({issues: value})
-        console.log("##########", this.state.issues)
         this.props.filteredList(this.state.issues)
     }
 
     getFilter(newFilter, filterby){
-        console.log("newFilter", newFilter)
-        console.log("filterby", filterby)
         this.setState({currentFilter: newFilter}, 
             () =>{
                 if(this.state.currentFilter === 'open'){
@@ -56,8 +52,11 @@ class FilteredIssue extends React.Component{
                 else if(this.state.currentFilter === 'Author'){
                     this.getIssueListByAuthor(filterby)
                 }
-                else{
-        
+                else if(this.state.currentFilter === 'Labels'){
+                    this.getIssueListByLabels(filterby)
+                }
+                else if(this.state.currentFilter === 'search'){
+                    this.getIssueListBySearch(filterby)
                 }
             });
         
@@ -110,7 +109,6 @@ class FilteredIssue extends React.Component{
     }
 
     getIssueListByAuthor(filterby){
-        console.log(filterby)
         if(!this.state.getData){
             this.setState({filterIssues: this.state.issues.filter((item) => (item.user.login === filterby))}, 
             () => {
@@ -120,18 +118,38 @@ class FilteredIssue extends React.Component{
         }
     }
 
-    render(){        
-        console.log("in issue header render")
-        // console.log(this.props.currentFilter)
+    getIssueListByLabels(filterby){
+        var lists = []
+        this.state.issues.map((item) => {
+            if(item.labels.length > 0){
+                for(let i = 0; i < item.labels.length; i++){
+                    if(item.labels[i].name === filterby){
+                        lists.push(item)
+                    }
+                }                
+            }
+        })
+        this.setState({filterIssues: lists}, () => this.props.filteredlist(this.state.filterIssues))
+    }
+
+    getIssueListBySearch(filterby){
+        const regex = new RegExp(filterby, 'i');
+        if(!this.state.getData){
+            this.setState({filterIssues: this.state.issues.filter((item) => item.get('name').search(regex) > -1)}, 
+            () => {
+                this.props.filteredlist(this.state.filterIssues)
+            })
+        }
+    }
+
+    render(){       
         return (
             <div className="issue-header">
                 <Open openedData = {this.getFilter} />
                 <Close closedData = {this.getFilter}/>
+                <Search searchData = {this.getFilter}/>
                 <Author authorData = {this.getFilter} issue = {this.props.issues}/>
-                {/* <Labels issue = {this.props.issues}/> */}
-                {/* <Projects issue = {this.props.issues}/>
-                <MileStones issue = {this.props.issues}/>
-                <Assignee issue = {this.props.issues}/> */}
+                <Labels labelData = {this.getFilter} issue = {this.props.issues}/>
                 <Sort sortData = {this.getFilter} />
             </div>
         );
