@@ -4,13 +4,13 @@ import React from "react";
 class Author extends React.Component{
     constructor(props) {
         super(props);
-
-        this.state = { value: 'Author' };
+        this.state = { value: 'Author', issues: [] };
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event){
         this.setState({ value: event.target.value });
+
     }
 
     render(){
@@ -32,9 +32,4 @@ class Author extends React.Component{
     }
 }
 
-// export default connect(
-//     state => ({
-//         issues: state
-//     })
-// )(Author);
 export default Author;

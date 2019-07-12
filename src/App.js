@@ -4,9 +4,9 @@ import Container from '@material-ui/core/Container';
 import jsonData from './issues.json';
 import IssuesList from './issueData/issuelist';
 import FilteredIssue from "./IssueHeader/IssueHeader";
-import Sort from "./IssueHeader/Sort"
+// import Sort from "./IssueHeader/Sort"
 
-var data = JSON.parse(JSON.stringify(jsonData))
+var data = JSON.parse(JSON.stringify(jsonData));
 
 class Issue extends React.Component {
     constructor(props){

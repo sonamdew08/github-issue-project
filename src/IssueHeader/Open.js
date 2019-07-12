@@ -7,8 +7,7 @@ class Open extends React.Component{
         super(props);
         this.state = {
             open: false, issues: [], openedIssue:[], fetch: false
-        }
-        
+        }        
         console.log("Inside open constructor")
         console.log(this.state)
         this.handleClick = this.handleClick.bind(this);

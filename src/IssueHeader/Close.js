@@ -14,16 +14,24 @@ class Close extends React.Component{
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event){
-        event.preventDefault()
-        if(!this.state.close){
-            this.setState({issues: this.props.issue, close: true})
-        }   
-        if(this.state.issues.length > 0){
-            this.setState({closedIssue : this.state.issues.filter((item) => (item.state === 'close'))})
-            console.log(this.state.closedIssue)
+    componentDidUpdate(){
+        if(!this.state.fetch){
+            this.setState({issues: this.props.issue, fetch: true})
         }
-        
+        if(this.state.close){
+            if(this.state.issues.length > 0){
+                this.setState({closedIssue : this.state.issues.filter((item) => (item.state === 'close')), close: false})
+                console.log("---closed Issue ---", this.state.closedIssue)
+                this.props.closedData(this.state.closedIssue)
+            }
+        }
+    }
+
+    handleClick(event){
+        event.preventDefault()  
+        console.log("inside handleClick of open")
+        console.log(this.state.issues)
+        this.setState({close: true})        
     }
 
     render(){
