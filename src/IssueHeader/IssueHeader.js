@@ -12,9 +12,16 @@ class FilteredIssue extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            issues: []
+            issues: [],
+            currentFilter: "open"
         }
         this.getListOfIssues = this.getListOfIssues.bind(this)
+        this.getFilter = this.getFilter.bind(this)
+        this.getOpenedIssueList = this.getOpenedIssueList.bind(this)
+    }
+
+    componentDidMount(){
+        this.setState({issues: this.props.issues})
     }
 
     getListOfIssues(value){
@@ -23,19 +30,31 @@ class FilteredIssue extends React.Component{
         this.props.filteredList(this.state.issues)
     }
 
+    getFilter(newFilter){
+        console.log("newFilter", newFilter)
+        this.setState({currentFilter: newFilter});
+        if(this.state.currentFilter === 'open'){
+            this.getOpenedIssueList()
+        }
+    }
+
+    getOpenedIssueList(){
+        
+    }
+
     render(){        
         console.log("in issue header render")
         // console.log(this.props.currentFilter)
         return (
             <div className="issue-header">
-                <Open issue = {this.props.issues} openedData = {this.getListOfIssues} />
-                <Close issue = {this.props.issues} closedData = {this.getListOfIssues}/>
+                <Open openedData = {this.getFilter} />
+                {/* <Close issue = {this.props.issues} closedData = {this.getListOfIssues}/>
                 <Author issue = {this.props.issues}/>
                 {/* <Labels issue = {this.props.issues}/> */}
-                <Projects issue = {this.props.issues}/>
+                {/* <Projects issue = {this.props.issues}/>
                 <MileStones issue = {this.props.issues}/>
                 <Assignee issue = {this.props.issues}/>
-                <Sort issue = {this.props.issues} sortData = {this.getListOfIssues} />
+                <Sort issue = {this.props.issues} sortData = {this.getListOfIssues} /> */}
             </div>
         );
     }

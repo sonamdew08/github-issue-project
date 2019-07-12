@@ -9,9 +9,7 @@ class IssuesList extends React.Component{
             fetch: false,
             data: false,
             issues: []
-        } 
-        console.log("calling constructor")
-        console.log(this.state)
+        }
     }
 
     componentDidMount(){
@@ -20,20 +18,17 @@ class IssuesList extends React.Component{
         }
     }
     
-    componentDidUpdate(prevProps){
-        console.log("updated")
-        if(this.state.data || prevProps !== this.props ){
-            console.log("inside update condition")
-            this.setState({issues: this.props.data, data: false})
-        }
-    }
+    // componentDidUpdate(prevProps){
+    //     console.log("updated")
+    //     if(this.state.data || prevProps !== this.props ){
+    //         console.log("inside update condition")
+    //         this.setState({issues: this.props.data, data: false})
+    //     }
+    // }
 
-    render(){        
-        console.log("inside issueslist render")
-        console.log(this.props)
+    render(){
         return (
             <div>
-                {console.log("--------------------", this.state)}
                 {this.state.fetch?this.state.issues.map((issue, index) => {
                     return (<Issues key={index} data={issue}/>)
                 }):<p>loading...</p>

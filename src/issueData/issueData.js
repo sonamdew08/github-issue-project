@@ -1,12 +1,44 @@
-import React from "react";
-import issueHeader from "../IssueHeader/IssueHeader"
+import React from 'react';
+import '../App.css';
+import Container from '@material-ui/core/Container';
+import IssuesList from './issuelist';
+import FilteredIssue from "../IssueHeader/IssueHeader";
+import jsonData from '../issues.json';
 
-class IssueData extends React.Component{
+var data = JSON.parse(JSON.stringify(jsonData));
+
+class IssueData extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            issues: [],
+            fetch: false, 
+            currentFilter: "open"
+        }
+        // this.getFilteredListOfIssues = this.getFilteredListOfIssues.bind(this)
+
+    }
+
+    componentDidMount(){
+        // console.log("inside component")
+        if(!this.state.fetch){
+            this.setState({issues: data, fetch: true})
+        }
+    }
+
+    // getFilteredListOfIssues(value){
+    //     console.log("Inside getListofissues")
+    //     this.setState({issues: value})
+    //     console.log(this.state.issues)
+    // }
+        
     render(){
+        // console.log("Inside app render") filteredList = {this.getFilteredListOfIssues} 
         return (
-            <div>
-                <issueHeader />
-            </div>
+            <Container maxWidth="md">
+                <FilteredIssue issues = {data}/>
+                {this.state.fetch? <IssuesList data={this.state.issues}/>: "Loading.."}             
+            </Container>
         );
     }
 }

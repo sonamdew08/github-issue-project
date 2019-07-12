@@ -5,13 +5,6 @@ import { transformAsync } from "@babel/core";
 
 class Issues extends React.Component{
 
-    constructor(props){
-        super(props)
-        this.state = {
-            open: true
-        }
-    }
-    
     render(){
         const issues = this.props.data
         return (
