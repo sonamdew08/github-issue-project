@@ -133,7 +133,9 @@ class FilteredIssue extends React.Component{
     }
 
     getIssueListBySearch(filterby){
+        console.log("filter", filterby)
         const regex = new RegExp(filterby, 'i');
+        console.log("regex", regex)
         if(!this.state.getData){
             this.setState({filterIssues: this.state.issues.filter(item => item.title.match(regex))},
             () => {

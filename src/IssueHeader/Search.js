@@ -10,8 +10,10 @@ class Search extends React.Component{
         }
         this.getMatchedList = this.getMatchedList.bind(this);
     }
-    getMatchedList(value){
-        this.setState({ filterby: value }, () => {
+    getMatchedList(event){
+        
+        this.setState({ filterby: event.target.value }, () => {
+            console.log(this.state.filterby)
             this.props.searchData(this.state.filter, this.state.filterby)
         });
     }
@@ -20,9 +22,7 @@ class Search extends React.Component{
         return (
             <input
                 placeholder="Search..."
-                onChange={word => {
-                    this.getMatchedList(word);
-                }}
+                onChange={this.getMatchedList}
             />
         );
     }
