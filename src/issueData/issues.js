@@ -6,9 +6,14 @@ class Issues extends React.Component{
         const issues = this.props.data
         return (
             <div className="issue">
-                <a href="">{issues.title}</a>
+                <a href="">{issues.title}</a>{Array.isArray(issues.labels) && issues.labels.map((label) => {
+                    // console.log("bgcolor", bgColor)
+                    return <a className="label-link" href="" style={{
+                        backgroundColor: "#" + label.color
+                      }}>{label.name}</a>
+                })}
                 <div>
-                    <p className="issue-info">#{issues.id} opened by {issues.user.login}</p>
+                    <p className="issue-info">#{issues.id} {issues.state} by {issues.user.login}</p>
                 </div>
             </div>
         );

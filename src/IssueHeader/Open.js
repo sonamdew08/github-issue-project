@@ -4,23 +4,24 @@ class Open extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            filter: "open"
+            filter: "open",
+            active: false
         }
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(event){
-        event.preventDefault()  
-        // console.log("inside handleClick of open")
+        event.preventDefault()
+        console.log("inside open click", event.target)
+        this.setState({active: !this.state.active})
         this.props.openedData(this.state.filter)       
     }
 
     render(){
         // console.log("inside open component" , this.props)
         return (
-            <span className="open">
-                <a href="" className="open-close" onClick={this.handleClick}>Open</a>
-            </span>
+            
+            <a href="" className={this.state.active? 'selected open-close': 'open-close'} onClick={this.handleClick}>Open</a>
              
         );
     }
